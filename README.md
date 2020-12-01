@@ -9,5 +9,5 @@ rip.exe -r D:\win7_registry\ntuser.dat -p enterprise_architect
 rip.exe -r D:\win7_registry\ntuser.dat -f korea_software
 ```
 
-<img src="images/0.png" width="50%">
-<img src="images/1.png" width="50%">
+<img src="images/0.png" width="75%">
+<img src="images/1.png" width="75%">
