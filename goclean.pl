@@ -1,6 +1,5 @@
 package goclean;
 use strict;
-use Encode::Unicode;
 
 my %config = (hive          => "NTUSER\.DAT",
               hasShortDescr => 1,
