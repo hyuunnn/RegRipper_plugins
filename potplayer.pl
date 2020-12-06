@@ -6,7 +6,7 @@ my %config = (hive          => "NTUSER\.DAT",
               hasDescr      => 0,
               hasRefs       => 0,
               osmask        => 22,
-              version       => 20201201);
+              version       => 20201206);
 
 sub getConfig{return %config}
 sub getShortDescr {
