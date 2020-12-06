@@ -36,12 +36,14 @@ sub pluginmain {
     my @paths = ("DataCacheCheck", "InstallDate", "LastLoginTime", "LastOpenFileDir", "LastPlayerLaunchDate", "LastStartupVersion", "RunCount");
 
     # SOFTWARE\RealNetworks\RealPlayer\20.0\Preferences\MostRecentClips{number}
-    $key = $root_key->get_subkey("SOFTWARE\\RealNetworks\\RealPlayer\\20.0\\Preferences");
-    my @sk = $key->get_list_of_subkeys();
-    if (scalar(@sk) > 0) {
-        foreach my $s (@sk) {
-            if ($s->get_name =~ m/MostRecentClips([0-9]+)/) {
-                push(@paths, $s->get_name);
+    my $key = $root_key->get_subkey("SOFTWARE\\RealNetworks\\RealPlayer\\20.0\\Preferences");
+    if ($key) {
+        my @sk = $key->get_list_of_subkeys();
+        if (scalar(@sk) > 0) {
+            foreach my $s (@sk) {
+                if ($s->get_name =~ m/MostRecentClips([0-9]+)/) {
+                    push(@paths, $s->get_name);
+                }
             }
         }
     }
@@ -51,7 +53,7 @@ sub pluginmain {
             ::rptMsg("[-] SOFTWARE\\RealNetworks\\RealPlayer\\20.0\\Preferences\\".$name);
             ::rptMsg("LastWrite Time ".::getDateFromEpoch($key->get_timestamp())."Z");
 
-            my $data = $key->get_value("")->get_data();
+            my $data = $key->get_value("")->get_data(); # (Default)
             if ($data){
                 if ($name eq "LastLoginTime" or $name eq "DataCacheCheck") {
                     ::rptMsg($name." (Default) : ".localtime($data));
