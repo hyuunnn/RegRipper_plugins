@@ -58,10 +58,9 @@ sub pluginmain {
             }
         }
 
-        foreach my $pathname (@paths) {
-            $keyname = $key_path."\\".$pathname;
-            if ($key = $root_key->get_subkey($keyname)) {
-                ::rptMsg("[-] ".$keyname);
+        foreach my $name (@paths) {
+            if ($key = $key->get_subkey($name)) {
+                ::rptMsg("[-] ".$name);
                 ::rptMsg("LastWrite Time ".::getDateFromEpoch($key->get_timestamp())."Z");
                 ::rptMsg("Host : ".$key->get_value("Host")->get_data());
                 ::rptMsg("Port : ".$key->get_value("Port")->get_data());
@@ -71,9 +70,8 @@ sub pluginmain {
                 ::rptMsg("SessionCreated : ".$key->get_value("SessionCreated")->get_data());
             }
 
-            $keyname = $key_path."\\".$pathname."\\QueryHistory";
-            if ($key = $root_key->get_subkey($keyname)) {
-                ::rptMsg("[-] ".$keyname);
+            if ($key = $key->get_subkey("QueryHistory")) {
+                ::rptMsg("[-] QueryHistory");
                 ::rptMsg("LastWrite Time ".::getDateFromEpoch($key->get_timestamp())."Z");
                 my @vals = $key->get_list_of_values();
                 if (scalar(@vals) > 0) {
