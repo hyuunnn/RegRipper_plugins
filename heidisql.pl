@@ -1,16 +1,28 @@
 package heidisql;
 use strict;
-
+#-----------------------------------------------------------
+# heidisql.pl
+# 
+#
+# Change history
+#  20201227 - created
+#
+# References
+# N/A
+# 
+# Author: Hyun Yi @hyuunnn
+#-----------------------------------------------------------
 my %config = (hive          => "NTUSER\.DAT",
               hasShortDescr => 1,
               hasDescr      => 0,
               hasRefs       => 0,
               osmask        => 22,
+              category      => "program execution",
               version       => 20201227);
 
 sub getConfig{return %config}
 sub getShortDescr {
-    return "heidisql"
+    return "Gets user's heidisql data"
 }
 sub getDescr{}
 sub getRefs {}
@@ -61,7 +73,6 @@ sub pluginmain {
         foreach my $name (@paths) {
             if ($key = $key->get_subkey($name)) {
                 ::rptMsg("[-] ".$name);
-                ::rptMsg("LastWrite Time ".::getDateFromEpoch($key->get_timestamp())."Z");
                 ::rptMsg("Host : ".$key->get_value("Host")->get_data());
                 ::rptMsg("Port : ".$key->get_value("Port")->get_data());
                 ::rptMsg("User : ".$key->get_value("User")->get_data());
@@ -72,7 +83,6 @@ sub pluginmain {
 
             if ($key = $key->get_subkey("QueryHistory")) {
                 ::rptMsg("[-] QueryHistory");
-                ::rptMsg("LastWrite Time ".::getDateFromEpoch($key->get_timestamp())."Z");
                 my @vals = $key->get_list_of_values();
                 if (scalar(@vals) > 0) {
                     foreach my $v (@vals) {
