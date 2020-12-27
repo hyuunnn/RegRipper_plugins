@@ -1,4 +1,4 @@
-package winscp;
+package winscp2;
 use strict;
 use Encode;
 
@@ -11,7 +11,7 @@ my %config = (hive          => "NTUSER\.DAT",
 
 sub getConfig{return %config}
 sub getShortDescr {
-    return "winscp"
+    return "winscp2"
 }
 sub getDescr{}
 sub getRefs {}
