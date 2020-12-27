@@ -49,7 +49,7 @@ sub pluginmain {
     }
 
     foreach my $name (@paths) {
-        if ($key = $root_key->get_subkey("SOFTWARE\\RealNetworks\\RealPlayer\\20.0\\Preferences\\".$name)) {
+        if ($key = $key->get_subkey($name)) {
             ::rptMsg("[-] SOFTWARE\\RealNetworks\\RealPlayer\\20.0\\Preferences\\".$name);
             ::rptMsg("LastWrite Time ".::getDateFromEpoch($key->get_timestamp())."Z");
 
